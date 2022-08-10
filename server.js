@@ -1,12 +1,21 @@
+const path = require('path');
 const express = require('express');
+const session = require('express-session');
+const exphbs = require('express-handlebars');
+
+
 // const routes = require('./routes');
 // const sequelize = require('./config/connection');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// deconstruct helpers from express-handlebar library and save it into variable hbs
+const hbs = exphbs.create({ helpers })
 
 app.get('/', (req, res) => res.send ('hello world'))
 
@@ -19,5 +28,5 @@ app.get('/', (req, res) => res.send ('hello world'))
 // });
 
 app.listen(PORT, () => {
-  console.log('Now Listening')
+  console.log(`Now listening on ${PORT}`)
 })
